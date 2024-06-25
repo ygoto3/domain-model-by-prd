@@ -1,0 +1,73 @@
+---
+service: dmbp-api 
+
+image: api
+
+servers:
+  web:
+    hosts:
+      - 0.0.0.0
+    labels:
+      traefik.http.routers.dmbp-api.entrypoints: websecure
+      traefik.http.routers.dmbp-api.rule: Host(`api.example.com`)
+      traefik.http.routers.dmbp-api.tls.certresolver: letsencrypt
+
+registry:
+  server: dmbpcr.azurecr.io
+  username: kamal
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+ssh:
+  user: azureuser
+
+env:
+  secret:
+    - DATABASE_URL
+    - ALLOWED_ORIGIN
+    - AZURE_OAI_ENDPOINT
+    - AZURE_OAI_KEY
+    - AZURE_OAI_DEPLOYMENT
+    - AZURE_API_VERSION
+
+builder:
+  dockerfile: "../Dockerfile"
+  context: ".."
+
+healthcheck:
+  path: "/ok"
+  port: 80
+
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - /letsencrypt/acme.json:/letsencrypt/acme.json
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entryPoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "email@example.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entryPoint: web
+
+accessories:
+  postgres:
+    image: postgres:16-bookworm
+    host: 0.0.0.0
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_USER
+        - POSTGRES_PASSWORD
+    options:
+      cpus: 1
+      memory: "1GB"
+    files:
+      - config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    directories:
+      - data:/var/lib/postgresql/data

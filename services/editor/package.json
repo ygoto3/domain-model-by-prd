@@ -1,0 +1,32 @@
+{
+  "name": "domain-model-by-prd-editor",
+  "version": "0.0.0",
+  "description": "An editor application for Domain Model by PRD",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "webpack serve --config=webpack.config.js",
+    "build": "webpack --config=webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ygoto3/domain-model-by-prd.git"
+  },
+  "author": "ygoto3 <email@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ygoto3/domain-model-by-prd/issues"
+  },
+  "homepage": "https://github.com/ygoto3/domain-model-by-prd#readme",
+  "devDependencies": {
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-merge": "^5.10.0"
+  },
+  "dependencies": {
+    "dotenv-webpack": "^8.1.0",
+    "mermaid": "^10.9.1"
+  }
+}

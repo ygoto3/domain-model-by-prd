@@ -1,0 +1,7 @@
+.devcontainer/
+.venv/
+kamal/
+.gitignore
+Dockerfile
+README.md
+run-docker.sh

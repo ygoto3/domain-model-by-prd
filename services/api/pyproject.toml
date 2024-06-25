@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "demain-model-by-prd-api"
+version = "0.0.0"
+description = "The API server for Domain Model by PRD"
+authors = ["ygoto3 <my.important.apes@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.111.0"
+uvicorn = "^0.30.1"
+python-dotenv = "^1.0.1"
+alembic = "^1.13.1"
+sqlalchemy = "^2.0.30"
+psycopg2-binary = "^2.9.9"
+openai = "^1.34.0"
+markupsafe = "^2.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

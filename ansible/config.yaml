@@ -1,0 +1,41 @@
+---
+
+- hosts: server-ubuntu
+  user: azureuser
+  become: yes
+  tasks:
+
+    - name: Install apt packages
+      tags: packages
+      ansible.builtin.apt:
+        update_cache: yes
+        name:
+          - curl
+          - docker.io
+          - git
+
+    - name: Add the app user
+      ansible.builtin.user:
+        name: azureuser
+        groups: docker
+        append: yes
+
+    - name: Prepare letsencrypt
+      block:
+
+      - name: Create letsencrypt direcotry
+        ansible.builtin.file:
+          path: /letsencrypt
+          state: directory
+          owner: azureuser
+          group: docker
+          mode: '0755'
+
+      - name: Create acme.json
+        ansible.builtin.file:
+          path: /letsencrypt/acme.json
+          state: touch
+          owner: azureuser
+          group: docker
+          mode: '0600'
+

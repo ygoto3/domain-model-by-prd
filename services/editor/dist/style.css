@@ -1,0 +1,60 @@
+#main-container {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+}
+
+#main-container > section {
+    margin: 0.5rem;
+}
+
+#prds {
+    width: 100%;
+    height: 2rem;
+    box-sizing: border-box;
+}
+
+#prd-title {
+    width: 100%;
+    height: 2rem;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+}
+
+#prd-editor {
+    width: 600px;
+    height: 640px;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+}
+
+#result > img {
+    width: 1024px;
+}
+
+#editor-section {
+    flex: 1 200px;
+    text-align: center;
+}
+
+#diagram-section {
+    border: 1px solid #333;
+    padding: 0.5rem;
+    width: 100%;
+    min-height: calc(640px + 5rem);
+    box-sizing: border-box;
+    position: relative;
+}
+
+#loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#mermaid {
+    margin-top: 0.5rem;
+}

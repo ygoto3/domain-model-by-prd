@@ -1,0 +1,7 @@
+dist/main.js
+dist/.gitignore
+.env
+kamal
+!kamal/.env
+node_modules
+.gitignore
